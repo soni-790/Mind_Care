@@ -22,7 +22,8 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/messages") // Backend API
+      // .get("http://localhost:5000/api/messages") 
+      .get("https://mind-care-zqu5.onrender.com/api/messages") 
       .then((res) => setMessages(res.data))
       .catch((err) => console.error("Error fetching messages:", err));
   }, []);
