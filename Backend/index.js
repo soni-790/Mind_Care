@@ -5,6 +5,7 @@ import cors from "cors";
 import morgan from "morgan";
 import connectDB from "./config/db.js";
 
+
 import messageRoutes from "./routes/message.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import meditationRoutes from "./routes/meditations.routes.js";
@@ -15,16 +16,10 @@ connectDB();
 
 const app = express();
 app.use(express.json());
-// app.use(cors({
-//    origin: "http://localhost:5173"
-   
-//    }));
 const allowedOrigins = [
   "http://localhost:5173",   // development (vite frontend local)
   "https://mind-care-1.onrender.com"  // deployment (frontend vercel url)
 ];
-
-
 
 
 app.use(cors({
@@ -41,15 +36,10 @@ app.use(cors({
 }));
 
 
-
-
-
-
-
 app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
-  res.send("MindCare API is running 🚀");
+  res.send("MindCare API is running ");
 });
 
 app.use("/api/messages", messageRoutes);
