@@ -15,10 +15,37 @@ connectDB();
 
 const app = express();
 app.use(express.json());
-app.use(cors({
-   origin: "http://localhost:5173"
+// app.use(cors({
+//    origin: "http://localhost:5173"
    
-   }));
+//    }));
+const allowedOrigins = [
+  "http://localhost:5173",   // development (vite frontend local)
+  "https://mind-care-1.onrender.com"  // deployment (frontend vercel url)
+];
+
+
+
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error("CORS not allowed for this origin"), false);
+    }
+  },
+  credentials: true
+}));
+
+
+
+
+
+
+
 app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
